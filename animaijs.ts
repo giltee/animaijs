@@ -4,14 +4,13 @@
  * @author Gil Comeau
  * @date 2024-02-01
  */
-export default class Animaijs {
+class Animaijs {
 
     private clone: HTMLElement | any;
     private el: HTMLElement;
     private originalHeight: number;
 
     constructor(el: HTMLElement | any) {
-        // console.log(el)
         this.el = el;
         this.clone = this.el.cloneNode(true);
         Object.assign(this.clone.style, {
@@ -214,6 +213,20 @@ export default class Animaijs {
         observer.observe(this.el);
     }
 
+    public pulse(time = 500){
+        const animation = (progress: number): any => {
+            if(progress < .7){
+                console.log('less')
+            } else if( progress >= .7 && progress < 1){
+                console.log('ani');
+            } else {
+                console.log('done');
+            }
+        }
+
+        this.__animate(animation, time)
+    }
+
     /**
      * 
      * @param {string} behavior One of smooth, instant, auto. Default: smooth
@@ -259,7 +272,7 @@ export default class Animaijs {
             Object.assign(this.el.style, { overflow: 'hidden', height: 0, display: 'block' });
             const animation = (progress: number) => this.el.style.height = `${parseInt(`${progress * this.originalHeight}`)}px`;
 
-            this.__animate(animation, time, () => this.el.style.height = `${this.originalHeight}px`);
+            this.__animate(animation, time, () => this.el.style.height = `unset`);
         }
 
         return this;
