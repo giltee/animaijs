@@ -4,7 +4,7 @@
  * @author Gil Comeau
  * @date 2024-02-01
  */
-class Animaijs {
+export default class Animaijs {
 
     private clone: HTMLElement | any;
     private el: HTMLElement;

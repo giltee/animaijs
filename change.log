@@ -1,0 +1,18 @@
+Initial Deployment: 15-Feb-2024
+Docs: https://webmeau.ca/animaijs
+Initial Animation List: 
+- bounce()
+- fadeIn()
+- fadeOut()
+- fadeToggle()
+- grow()
+- observeIntersection()
+- scroll()
+- shrink()
+- slideDown()
+- slideUp()
+- slideToggle()
+- typeMessage()
+
+Addition: 
+pulse() 
