@@ -4,6 +4,15 @@
  * @author Gil Comeau
  * @date 2024-02-01
  */
+
+
+interface PulseOptions {
+    color: string;
+    margin?: string;
+    padding?: string;       
+    shadow?: number; 
+}
+
 export default class Animaijs {
 
     private clone: HTMLElement | any;
@@ -44,7 +53,14 @@ export default class Animaijs {
         callback();
     }
 
-
+    private __hexToRgb(hex: string){
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : { r: 0, g: 0, b:0 };
+    }
 
     /** 
      * Determines if the element is visible in the dom or not
@@ -213,18 +229,70 @@ export default class Animaijs {
         observer.observe(this.el);
     }
 
-    public pulse(time = 500){
+    public pulse(time = 500, options: PulseOptions = {
+        color: '#000000',
+        margin: '5px',
+        padding: '5px',
+        shadow: 10,
+    }){
+
+        const defaults = {
+            color: '#000000',
+            margin: '5px',
+            padding: '5px',
+            shadow: 10
+        }
+        
+        for(const key in defaults){
+            if(!options[key]){
+                options[key] = defaults[key]
+            }
+        }
+        const orginalMargin = this.el.style.margin;
+        const originalPadding = this.el.style.padding;
+
+        let {color,  margin, padding, shadow } = options;      
+
+        let rgb = {r: 0, g: 0, b: 0};
+        if(color.match(/#[0-9]{6}|[a-f]{6}|([a-fA-Z0-9]){6}/)){
+            
+            rgb = this.__hexToRgb(options.color);
+        } else {
+            console.error('You need to provide a 6 digit hex value including the #');
+            return;
+        }
+        const boxShadowStr = (pixel = 0, alpha = 0) => {
+            return `0 0 ${pixel}px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha})`
+        }
+
         const animation = (progress: number): any => {
-            if(progress < .7){
-                console.log('less')
-            } else if( progress >= .7 && progress < 1){
-                console.log('ani');
-            } else {
-                console.log('done');
+
+            if(progress < .5){
+                
+                Object.assign(this.el.style, { 
+                    boxShadow: boxShadowStr(shadow * progress, progress + .5),
+                    margin: margin,
+                    padding: padding,
+                    transform: 'scale(0.95)'
+                });
+
+            }  else {
+
+                Object.assign(this.el.style, { 
+                    boxShadow: boxShadowStr((shadow * 2) * progress, 1 - progress + .5),
+                    margin: margin,
+                    padding: padding,
+                    transform: 'scale(1)'
+                });
             }
         }
 
-        this.__animate(animation, time)
+        this.__animate(animation, time, () => Object.assign(this.el.style, { 
+            boxShadow:  boxShadowStr(0, 0),
+            margin: orginalMargin,
+            padding: originalPadding,
+            transform: 'scale(1)'
+        }))
     }
 
     /**
