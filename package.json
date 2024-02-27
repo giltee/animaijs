@@ -1,0 +1,27 @@
+{
+  "name": "animaijs",
+  "version": "1.0.0",
+  "description": "A simple vanilla js wrapper for animations",
+  "main": "animaijs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giltee/animaijs.git"
+  },
+  "keywords": [
+    "js",
+    "javascript",
+    "animations",
+    "vanilla",
+    "js",
+    "wrapper"
+  ],
+  "author": "Gil Comeau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/giltee/animaijs/issues"
+  },
+  "homepage": "https://github.com/giltee/animaijs#readme"
+}
