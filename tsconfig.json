@@ -4,7 +4,8 @@
         "module": "CommonJS",
         "lib": [
             "ESNext",
-            "DOM"
+            "DOM", 
+            "es2020"
         ]
     }
 }
