@@ -7,7 +7,9 @@
 
 ## Npm 
 https://www.npmjs.com/package/animaijs
+```
 npm i --save animaijs
+```
 
 ## build vanilla class file
 ```
