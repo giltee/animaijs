@@ -250,11 +250,8 @@ export default class Animaijs {
             shadow: 10
         }
 
-        console.log(window.getComputedStyle(this.el).backgroundColor);
-
         for (const key in defaults) {
             const myKey = key as keyof PulseOptions;
-            console.log(options, myKey)
             if (!options.hasOwnProperty(myKey)) {
                 //@ts-ignore
                 options[myKey] = defaults[myKey] as PulseOptions[typeof myKey];
@@ -270,7 +267,6 @@ export default class Animaijs {
             rgb = this.__parseRgb(color)
         }
         else if (color?.match(/#[0-9]{6}|[a-f]{6}|([a-fA-Z0-9]){6}/)) {
-            console.log('hi')
             rgb = this.__hexToRgb(color);
         }
         else {
