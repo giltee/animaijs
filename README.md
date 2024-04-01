@@ -5,8 +5,11 @@
 ## Docs
 - [Documentation](https://webmeau.ca/animaijs)
 
-## build the vanillla
+## Npm 
+https://www.npmjs.com/package/animaijs
+npm i --save animaijs
 
+## build vanilla class file
 ```
     # remove export default in animaijs.ts
     tsc // needs typscript installed
